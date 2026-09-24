@@ -4,7 +4,7 @@ slug: hermes_agent
 description: >-
   Hermes Agent by Nous Research — self-improving AI agent with persistent
   memory, skills, and a web dashboard. Packaged for Home Assistant OS.
-url: https://github.com/devinslick/hermes-hassio-addon
+url: https://github.com/albatross-canary/hermes-hassio-addon
 arch:
   - amd64
 init: false

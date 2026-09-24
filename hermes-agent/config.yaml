@@ -1,0 +1,26 @@
+name: Hermes Agent
+version: "1.0.0"
+slug: hermes_agent
+description: >-
+  Hermes Agent by Nous Research — self-improving AI agent with persistent
+  memory, skills, and a web dashboard. Packaged for Home Assistant OS.
+url: https://github.com/devinslick/hermes-hassio-addon
+arch:
+  - amd64
+init: false
+startup: services
+boot: auto
+hassio_role: default
+ports:
+  8642/tcp: 8642
+ports_description:
+  8642/tcp: Hermes web dashboard (HTTP, no auth — LAN only)
+map: []
+options:
+  hermes_home: /data
+schema:
+  hermes_home: match(^/data$)
+image: devinslick/hermes-hassio
+environment:
+  HERMES_HOME: /data
+  HERMES_DASHBOARD_HOST: 0.0.0.0

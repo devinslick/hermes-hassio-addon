@@ -8,7 +8,7 @@ url: https://github.com/devinslick/hermes-hassio-addon
 arch:
   - amd64
 init: false
-startup: services
+startup: application
 boot: auto
 hassio_role: default
 ports:
@@ -16,10 +16,7 @@ ports:
 ports_description:
   8642/tcp: Hermes web dashboard (HTTP, no auth — LAN only)
 map: []
-options:
-  hermes_home: /data
-schema:
-  hermes_home: match(^/data$)
+watchdog: http://[HOST]:8642/
 image: devinslick/hermes-hassio
 environment:
   HERMES_HOME: /data

@@ -10,6 +10,12 @@
 
 FROM devinslick/hermes:latest
 
+# Supervisor image validation labels (arch must match config.yaml)
+LABEL \
+    io.hass.type="addon" \
+    io.hass.version="1.0.0" \
+    io.hass.arch="amd64"
+
 # HA Supervisor mounts /data root-owned. The base image drops to the
 # `hermes` user, so fix ownership at boot before any service starts.
 # (cont-init.d runs under s6 during container startup.)

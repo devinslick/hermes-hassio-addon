@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "hermes-agent/**"
+      - ".github/workflows/build-hassio.yaml"
   workflow_dispatch:
 
 jobs:
@@ -12,6 +15,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Ensure workflow tag matches add-on version
+        run: |
+          CFG_VER=$(grep -oP '(?<=^version: ")[^"]+' hermes-agent/config.yaml)
+          TAG_VER=$(grep -oP '(?<=devinslick/hermes-hassio:)[0-9.]+' .github/workflows/build-hassio.yaml | head -1)
+          echo "config=$CFG_VER workflow=$TAG_VER"
+          [ "$CFG_VER" = "$TAG_VER" ] || { echo "::error::version mismatch — bump BOTH hermes-agent/config.yaml and the workflow tag"; exit 1; }
+          LABEL_VER=$(grep -oP '(?<=io.hass.version=")[^"]+' hermes-agent/Dockerfile)
+          [ "$CFG_VER" = "$LABEL_VER" ] || { echo "::error::Dockerfile io.hass.version label mismatch"; exit 1; }
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3

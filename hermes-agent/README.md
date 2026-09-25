@@ -10,7 +10,7 @@ HA Supervisor's add-on model with `init: false`).
 ## Install
 
 Settings → Add-ons → Add-on Store → ⋮ → Repositories → add
-`https://github.com/albatross-canary/hermes-hassio-addon`, then install
+`https://github.com/devinslick/hermes-hassio-addon`, then install
 **Hermes Agent**.
 
 ## Setup
